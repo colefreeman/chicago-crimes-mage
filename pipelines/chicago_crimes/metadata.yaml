@@ -1,0 +1,360 @@
+blocks:
+- all_upstream_blocks_executed: true
+  color: null
+  configuration: {}
+  downstream_blocks:
+  - get_max_updated_on_date
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: get_chicago_crimes
+  retry_config: null
+  status: executed
+  timeout: null
+  type: data_loader
+  upstream_blocks: []
+  uuid: get_chicago_crimes
+- all_upstream_blocks_executed: true
+  color: null
+  configuration: {}
+  downstream_blocks:
+  - convert_addresses
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: get_max_updated_on_date
+  retry_config: null
+  status: executed
+  timeout: null
+  type: transformer
+  upstream_blocks:
+  - get_chicago_crimes
+  uuid: get_max_updated_on_date
+- all_upstream_blocks_executed: true
+  color: null
+  configuration: {}
+  downstream_blocks:
+  - dbt/chicago_crimes/models/bronze/crimes_bronze
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: convert_addresses
+  retry_config: null
+  status: executed
+  timeout: null
+  type: transformer
+  upstream_blocks:
+  - get_max_updated_on_date
+  uuid: convert_addresses
+- all_upstream_blocks_executed: true
+  color: null
+  configuration:
+    dbt_project_name: dbt/chicago_crimes
+    file_path: dbt/chicago_crimes/models/bronze/crimes_bronze.sql
+    file_source:
+      path: dbt/chicago_crimes/models/bronze/crimes_bronze.sql
+      project_path: dbt/chicago_crimes
+    limit: 1000
+  downstream_blocks:
+  - dbt/chicago_crimes/snapshots/crimes_snapshot
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: sql
+  name: dbt/chicago_crimes/models/bronze/crimes_bronze
+  retry_config: null
+  status: executed
+  timeout: null
+  type: dbt
+  upstream_blocks:
+  - convert_addresses
+  uuid: dbt/chicago_crimes/models/bronze/crimes_bronze
+- all_upstream_blocks_executed: true
+  color: null
+  configuration:
+    dbt: {}
+    dbt_profile_target: null
+    dbt_project_name: dbt/chicago_crimes
+    disable_query_preprocessing: false
+    export_write_policy: append
+    file_path: dbt/chicago_crimes/models/silver/crimes_silver.sql
+    file_source:
+      path: dbt/chicago_crimes/models/silver/crimes_silver.sql
+      project_path: dbt/chicago_crimes
+    limit: 1000
+    use_raw_sql: false
+  downstream_blocks:
+  - dbt/chicago_crimes/models/gold/dim_crimes_location
+  - dbt/chicago_crimes/snapshots/snapshot_crimes_hours
+  - dbt/chicago_crimes/snapshots/snapshot_crimes_cases
+  - dbt/chicago_crimes/snapshots/snapshot_crimes_description
+  - dbt/chicago_crimes/snapshots/snapshot_crimes_type
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: sql
+  name: dbt/chicago_crimes/models/silver/crimes_silver
+  retry_config: null
+  status: updated
+  timeout: null
+  type: dbt
+  upstream_blocks:
+  - dbt/chicago_crimes/snapshots/crimes_snapshot
+  uuid: dbt/chicago_crimes/models/silver/crimes_silver
+- all_upstream_blocks_executed: false
+  color: null
+  configuration:
+    dbt_project_name: dbt/chicago_crimes
+    file_path: dbt/chicago_crimes/models/gold/dim_crimes_cases.sql
+    file_source:
+      path: dbt/chicago_crimes/models/gold/dim_crimes_cases.sql
+      project_path: dbt/chicago_crimes
+    limit: 1000
+  downstream_blocks: []
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: sql
+  name: dbt/chicago_crimes/models/gold/dim_crimes_cases
+  retry_config: null
+  status: executed
+  timeout: null
+  type: dbt
+  upstream_blocks:
+  - dbt/chicago_crimes/snapshots/snapshot_crimes_cases
+  uuid: dbt/chicago_crimes/models/gold/dim_crimes_cases
+- all_upstream_blocks_executed: false
+  color: null
+  configuration:
+    dbt_project_name: dbt/chicago_crimes
+    file_path: dbt/chicago_crimes/models/gold/dim_crimes_hours.sql
+    file_source:
+      path: dbt/chicago_crimes/models/gold/dim_crimes_hours.sql
+      project_path: dbt/chicago_crimes
+    limit: 1000
+  downstream_blocks: []
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: sql
+  name: dbt/chicago_crimes/models/gold/dim_crimes_hours
+  retry_config: null
+  status: executed
+  timeout: null
+  type: dbt
+  upstream_blocks:
+  - dbt/chicago_crimes/snapshots/snapshot_crimes_hours
+  uuid: dbt/chicago_crimes/models/gold/dim_crimes_hours
+- all_upstream_blocks_executed: false
+  color: null
+  configuration:
+    dbt_project_name: dbt/chicago_crimes
+    file_path: dbt/chicago_crimes/models/gold/dim_crimes_type.sql
+    file_source:
+      path: dbt/chicago_crimes/models/gold/dim_crimes_type.sql
+      project_path: dbt/chicago_crimes
+    limit: 1000
+  downstream_blocks: []
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: sql
+  name: dbt/chicago_crimes/models/gold/dim_crimes_type
+  retry_config: null
+  status: failed
+  timeout: null
+  type: dbt
+  upstream_blocks:
+  - dbt/chicago_crimes/snapshots/snapshot_crimes_type
+  uuid: dbt/chicago_crimes/models/gold/dim_crimes_type
+- all_upstream_blocks_executed: false
+  color: null
+  configuration:
+    dbt_project_name: dbt/chicago_crimes
+    file_path: dbt/chicago_crimes/models/gold/dim_crimes_location.sql
+    file_source:
+      path: dbt/chicago_crimes/models/gold/dim_crimes_location.sql
+      project_path: dbt/chicago_crimes
+    limit: 1000
+  downstream_blocks: []
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: sql
+  name: dbt/chicago_crimes/models/gold/dim_crimes_location
+  retry_config: null
+  status: updated
+  timeout: null
+  type: dbt
+  upstream_blocks:
+  - dbt/chicago_crimes/models/silver/crimes_silver
+  uuid: dbt/chicago_crimes/models/gold/dim_crimes_location
+- all_upstream_blocks_executed: true
+  color: null
+  configuration:
+    dbt: {}
+    dbt_profile_target: null
+    dbt_project_name: dbt/chicago_crimes
+    disable_query_preprocessing: false
+    export_write_policy: append
+    file_path: dbt/chicago_crimes/snapshots/crimes_snapshot.sql
+    file_source:
+      path: dbt/chicago_crimes/snapshots/crimes_snapshot.sql
+      project_path: dbt/chicago_crimes
+    limit: 1000
+    use_raw_sql: false
+  downstream_blocks:
+  - dbt/chicago_crimes/models/silver/crimes_silver
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: sql
+  name: dbt/chicago_crimes/snapshots/crimes_snapshot
+  retry_config: null
+  status: executed
+  timeout: null
+  type: dbt
+  upstream_blocks:
+  - dbt/chicago_crimes/models/bronze/crimes_bronze
+  uuid: dbt/chicago_crimes/snapshots/crimes_snapshot
+- all_upstream_blocks_executed: false
+  color: null
+  configuration:
+    dbt_project_name: dbt/chicago_crimes
+    file_path: dbt/chicago_crimes/snapshots/snapshot_crimes_hours.sql
+    file_source:
+      path: dbt/chicago_crimes/snapshots/snapshot_crimes_hours.sql
+      project_path: dbt/chicago_crimes
+    limit: 1000
+  downstream_blocks:
+  - dbt/chicago_crimes/models/gold/dim_crimes_hours
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: sql
+  name: dbt/chicago_crimes/snapshots/snapshot_crimes_hours
+  retry_config: null
+  status: updated
+  timeout: null
+  type: dbt
+  upstream_blocks:
+  - dbt/chicago_crimes/models/silver/crimes_silver
+  uuid: dbt/chicago_crimes/snapshots/snapshot_crimes_hours
+- all_upstream_blocks_executed: false
+  color: null
+  configuration:
+    dbt_project_name: dbt/chicago_crimes
+    file_path: dbt/chicago_crimes/snapshots/snapshot_crimes_cases.sql
+    file_source:
+      path: dbt/chicago_crimes/snapshots/snapshot_crimes_cases.sql
+      project_path: dbt/chicago_crimes
+    limit: 1000
+  downstream_blocks:
+  - dbt/chicago_crimes/models/gold/dim_crimes_cases
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: sql
+  name: dbt/chicago_crimes/snapshots/snapshot_crimes_cases
+  retry_config: null
+  status: updated
+  timeout: null
+  type: dbt
+  upstream_blocks:
+  - dbt/chicago_crimes/models/silver/crimes_silver
+  uuid: dbt/chicago_crimes/snapshots/snapshot_crimes_cases
+- all_upstream_blocks_executed: false
+  color: null
+  configuration:
+    dbt_project_name: dbt/chicago_crimes
+    file_path: dbt/chicago_crimes/snapshots/snapshot_crimes_description.sql
+    file_source:
+      path: dbt/chicago_crimes/snapshots/snapshot_crimes_description.sql
+      project_path: dbt/chicago_crimes
+    limit: 1000
+  downstream_blocks:
+  - dbt/chicago_crimes/models/gold/dim_crimes_description
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: sql
+  name: dbt/chicago_crimes/snapshots/snapshot_crimes_description
+  retry_config: null
+  status: executed
+  timeout: null
+  type: dbt
+  upstream_blocks:
+  - dbt/chicago_crimes/models/silver/crimes_silver
+  uuid: dbt/chicago_crimes/snapshots/snapshot_crimes_description
+- all_upstream_blocks_executed: false
+  color: null
+  configuration:
+    dbt_project_name: dbt/chicago_crimes
+    file_path: dbt/chicago_crimes/models/gold/dim_crimes_description.sql
+    file_source:
+      path: dbt/chicago_crimes/models/gold/dim_crimes_description.sql
+      project_path: dbt/chicago_crimes
+    limit: 1000
+  downstream_blocks: []
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: sql
+  name: dbt/chicago_crimes/models/gold/dim_crimes_description
+  retry_config: null
+  status: updated
+  timeout: null
+  type: dbt
+  upstream_blocks:
+  - dbt/chicago_crimes/snapshots/snapshot_crimes_description
+  uuid: dbt/chicago_crimes/models/gold/dim_crimes_description
+- all_upstream_blocks_executed: false
+  color: null
+  configuration:
+    dbt_project_name: dbt/chicago_crimes
+    file_path: dbt/chicago_crimes/snapshots/snapshot_crimes_type.sql
+    file_source:
+      path: dbt/chicago_crimes/snapshots/snapshot_crimes_type.sql
+      project_path: dbt/chicago_crimes
+    limit: 1000
+  downstream_blocks:
+  - dbt/chicago_crimes/models/gold/dim_crimes_type
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: sql
+  name: dbt/chicago_crimes/snapshots/snapshot_crimes_type
+  retry_config: null
+  status: updated
+  timeout: null
+  type: dbt
+  upstream_blocks:
+  - dbt/chicago_crimes/models/silver/crimes_silver
+  uuid: dbt/chicago_crimes/snapshots/snapshot_crimes_type
+cache_block_output_in_memory: false
+callbacks: []
+concurrency_config: {}
+conditionals: []
+created_at: '2024-04-10 12:14:19.769928+00:00'
+data_integration: null
+description: null
+executor_config: {}
+executor_count: 1
+executor_type: null
+extensions: {}
+name: chicago_crimes
+notification_config: {}
+remote_variables_dir: null
+retry_config: {}
+run_pipeline_in_one_process: false
+settings:
+  triggers: null
+spark_config: {}
+tags: []
+type: python
+uuid: chicago_crimes
+variables_dir: /home/src/mage_data/your_first_project
+widgets: []

@@ -1,0 +1,14 @@
+sources:
+- description: Dataframes Mage upstream blocks
+  loader: mage
+  name: mage_chicago_crimes
+  schema: public
+  tables:
+  - description: Dataframe for block `convert_addresses` of the `chicago_crimes` mage
+      pipeline.
+    identifier: mage_chicago_crimes_convert_addresses
+    meta:
+      block_uuid: convert_addresses
+      pipeline_uuid: chicago_crimes
+    name: chicago_crimes_convert_addresses
+version: 2
