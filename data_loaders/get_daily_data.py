@@ -14,7 +14,7 @@ if 'test' not in globals():
 def load_data_from_api(**kwargs):
     # Construct the API URL and headers
     url = 'https://data.cityofchicago.org/resource/ijzp-q8t2.csv'
-    app_token = 'yDYVZji7yOFWqIjs3gRCQU1Om'
+    app_token = 'Get Yours at Chicago Data Portal'
     
     # Assuming the API can filter by the 'updated_on' date,
     # construct the query to fetch records from the most recent day available.
