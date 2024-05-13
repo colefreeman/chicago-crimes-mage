@@ -10,7 +10,7 @@ if 'test' not in globals():
 @data_loader
 def load_data_from_api(**kwargs):
     url='https://data.cityofchicago.org/resource/ijzp-q8t2.csv?$order=updated_on DESC&$limit=10000'
-    app_token = 'yDYVZji7yOFWqIjs3gRCQU1Om'
+    app_token = 'Get Yours at Chicago Data Portal'
     #year="2023"
     headers = {
         "id": "id",
