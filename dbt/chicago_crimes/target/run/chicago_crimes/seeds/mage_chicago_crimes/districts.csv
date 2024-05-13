@@ -1,0 +1,12 @@
+
+    
+    
+    truncate table "CHICAGO_CRIMES"."public"."districts";
+    -- dbt seed --
+    
+          insert into "CHICAGO_CRIMES"."public"."districts" ("the_geom", "DIST_LABEL", "DIST_NUM") values
+          (%s,%s,%s),(%s,%s,%s),(%s,%s,%s),(%s,%s,%s),(%s,%s,%s),(%s,%s,%s),(%s,%s,%s),(%s,%s,%s),(%s,%s,%s),(%s,%s,%s),(%s,%s,%s),(%s,%s,%s),(%s,%s,%s),(%s,%s,%s),(%s,%s,%s),(%s,%s,%s),(%s,%s,%s),(%s,%s,%s),(%s,%s,%s),(%s,%s,%s),(%s,%s,%s),(%s,%s,%s),(%s,%s,%s),(%s,%s,%s),(%s,%s,%s)
+      
+
+;
+  
