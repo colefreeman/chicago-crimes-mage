@@ -6,7 +6,7 @@ chicago_crimes:
     dev:
       dbname: CHICAGO_CRIMES
       host: host.docker.internal
-      password: SpartansWin$2022
+      password: Password
       port: 5432
       schema: public
       type: postgres
