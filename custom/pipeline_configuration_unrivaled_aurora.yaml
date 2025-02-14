@@ -1,0 +1,54 @@
+# metadata.yaml
+
+version: 2
+dynamic: true
+stream: true
+
+variables:
+  bucket_name:
+    type: str
+    description: GCS bucket name
+    default: my-data-bucket
+  
+  prefix:
+    type: str 
+    description: Folder prefix in bucket
+    default: raw/
+
+  file_pattern:
+    type: str
+    description: File name pattern to match
+    default: "*.csv"
+
+  target_table:
+    type: str
+    description: BigQuery destination table
+    default: project.dataset.table
+
+blocks:
+  gcs_data_loader:
+    uuid: gcs_data_loader
+    type: data_loader
+    upstream: []
+    downstream: [bigquery_data_exporter]
+    
+  bigquery_data_exporter:
+    uuid: bigquery_data_exporter 
+    type: data_exporter
+    upstream: [gcs_data_loader]
+    downstream: [pipeline_configuration]
+
+  pipeline_configuration:
+    uuid: pipeline_configuration
+    type: custom
+    upstream: [bigquery_data_exporter]
+    downstream: []
+
+triggers:
+  - name: gcs_trigger
+    schedule: "0 * * * *" # Every hour
+    variables:
+      bucket_name: my-data-bucket
+      prefix: raw/
+      file_pattern: "*.csv"
+      target_table: project.dataset.table

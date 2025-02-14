@@ -1,0 +1,87 @@
+blocks:
+- all_upstream_blocks_executed: true
+  color: null
+  configuration:
+    file:
+      content: "from mage_ai.settings.repo import get_repo_path\nfrom mage_ai.io.config\
+        \ import ConfigFileLoader\nfrom mage_ai.io.google_cloud_storage import GoogleCloudStorage\n\
+        from os import path\nif 'data_loader' not in globals():\n    from mage_ai.data_preparation.decorators\
+        \ import data_loader\nif 'test' not in globals():\n    from mage_ai.data_preparation.decorators\
+        \ import test\n\n\n@data_loader\ndef load_from_google_cloud_storage(*args,\
+        \ **kwargs):\n    \"\"\"\n    Template for loading data from a Google Cloud\
+        \ Storage bucket.\n    Specify your configuration settings in 'io_config.yaml'.\n\
+        \n    Docs: https://docs.mage.ai/design/data-loading#googlecloudstorage\n\
+        \    \"\"\"\n    config_path = path.join(get_repo_path(), 'io_config.yaml')\n\
+        \    config_profile = 'default'\n\n    bucket_name = 'your_bucket_name'\n\
+        \    object_key = 'your_object_key'\n\n    return GoogleCloudStorage.with_config(ConfigFileLoader(config_path,\
+        \ config_profile)).load(\n        bucket_name,\n        object_key,\n    )\n\
+        \n\n@test\ndef test_output(output, *args) -> None:\n    \"\"\"\n    Template\
+        \ code for testing the output of the block.\n    \"\"\"\n    assert output\
+        \ is not None, 'The output is undefined'"
+      directory_name: data_loaders
+      directory_path: /home/src/coles-workspace-2/data_loaders
+      display_directory_path: /home/src/coles-workspace-2/data_loaders
+      display_path: /home/src/coles-workspace-2/data_loaders/fetch_csv_files.py
+      extension: py
+      folder: false
+      folders: null
+      items: null
+      language: python
+      modified_timestamp: 1739446522
+      name: fetch_csv_files.py
+      output: null
+      parent_items: null
+      path: /home/src/coles-workspace-2/data_loaders/fetch_csv_files.py
+      pipeline_counts: null
+      previous_parent_items: null
+      relative_path: coles-workspace-2/data_loaders/fetch_csv_files.py
+      root: false
+      size: 1129
+      versions: null
+    file_path: data_loaders/fetch_order_files.py
+    file_source:
+      path: data_loaders/fetch_order_files.py
+  downstream_blocks: []
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: Fetch order files
+  retry_config: null
+  status: executed
+  timeout: null
+  type: data_loader
+  upstream_blocks: []
+  uuid: fetch_order_files
+cache_block_output_in_memory: false
+callbacks: []
+concurrency_config: {}
+conditionals: []
+created_at: '2025-02-13 11:33:07.033622+00:00'
+created_by: freem124
+data_integration: null
+description: Build your own custom data pipeline from a blank canvas.
+executor_config: {}
+executor_count: 1
+executor_type: null
+extensions:
+  great_expectations:
+    blocks: []
+name: Lunch and Learn Data Lakehouse Part 1
+notification_config: {}
+overrides: null
+remote_variables_dir: null
+retry_config: {}
+run_pipeline_in_one_process: false
+settings:
+  triggers: null
+spark_config: {}
+state_store_config: {}
+tags:
+- cole
+- demo
+- datalake
+type: python
+uuid: lunch_and_learn_data_lakehouse_part_1
+variables_dir: /home/src/mage_data/coles-workspace-2
+widgets: []
